@@ -1,0 +1,29 @@
+@import '../../common/styles/functions.scss';
+
+.movies-grid {
+  .spnner {
+    margin-top: 5em;
+  }
+
+  .movies-list {
+    display: flex;
+    margin: rem-calc(0 0 0 -15px);
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    &-item {
+      margin: rem-calc(15px 0 0 15px);
+      flex: 1 0 20%;
+      animation: flyFromTop 1.1s normal forwards ease-in-out;
+    }
+  }
+
+  @keyframes flyFromTop {
+    0% {
+      transform: translateY(-100vh);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
