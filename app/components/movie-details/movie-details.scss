@@ -1,0 +1,27 @@
+@import '../../common/styles/functions.scss';
+
+.movie-details {
+  .image,
+  .details {
+    max-width: 50%;
+    float: left;
+  }
+
+  .details {
+    background: $color-background-main;
+    padding: rem-calc(15px);
+    box-sizing: border-box;
+  }
+
+  .title {
+    font-size: rem-calc(32px);
+    font-weight: $global-font-weight-bold;
+  }
+
+  .released,
+  .description {
+    margin: rem-calc(15px 0 0);
+    font-size: rem-calc(20px);
+    line-height: rem-calc(25px);
+  }
+}
