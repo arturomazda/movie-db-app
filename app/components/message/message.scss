@@ -1,0 +1,8 @@
+@import '../../common/styles/functions.scss';
+
+.message {
+  margin: rem-calc(15px 0);
+  background-color: $color-message-info;
+  padding: rem-calc(15px);
+  font-size: rem-calc(20px);
+}
