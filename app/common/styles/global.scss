@@ -1,0 +1,26 @@
+@import 'variables';
+@import 'colors';
+@import 'functions';
+
+html {
+  font-size: $global-font-size;
+  height: 100%;
+}
+
+body {
+  font-family: $global-font-family;
+  font-weight: 300;
+  font-size: 1em;
+  color: $color-font;
+  background-color: $color-background;
+  padding: rem-calc(56px 0 48px);
+  min-height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+}
+
+#app {
+  background: $color-background-main;
+  width: 100%;
+}
