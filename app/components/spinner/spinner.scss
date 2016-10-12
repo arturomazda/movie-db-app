@@ -1,0 +1,27 @@
+@import '../../common/styles/colors.scss';
+@import '../../common/styles/functions.scss';
+
+.spinner {
+  padding: 20vh 0;
+
+  .icon {
+    margin: 0 auto;
+    width: 5em;
+    height: 5em;
+    position: relative;
+    border: .75em solid $color-input-border;
+    border-left-color: $color-primary;
+    border-radius: 50%;
+    animation: spin 1.5s infinite linear;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
