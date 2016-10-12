@@ -1,0 +1,29 @@
+@import '../../common/styles/functions.scss';
+
+.header {
+  background: $color-primary;
+  color: $color-font-negative;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+
+  .home-link {
+    color: $color-font-negative;
+  }
+
+  .logo {
+    float: left;
+  }
+
+  .title {
+    margin: rem-calc(2px 0 0 10px);
+    float: left;
+    line-height: rem-calc(22px);
+    font-size: rem-calc(22px);
+    vertical-align: middle;
+    font-weight: $global-font-weight-bold;
+  }
+}
