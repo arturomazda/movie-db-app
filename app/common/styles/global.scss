@@ -21,6 +21,36 @@ body {
   align-items: stretch;
 }
 
+input {
+  border: rem-calc(1px) solid $color-input-border;
+  padding: .5em;
+  font-size: 1em;
+  outline: 0;
+
+  &:focus {
+    border-color: $color-primary;
+  }
+
+  &:disabled {
+    background-color: $color-input-border;
+    color: $color-font-negative;
+  }
+}
+
+button {
+  border: rem-calc(1px) solid $color-primary;
+  background-color: $color-primary;
+  padding: .5em 1em;
+  font-size: 1em;
+  color: $color-font-negative;
+  font-weight: $global-font-weight;
+
+  &:disabled {
+    background-color: $color-input-border;
+    border-color: $color-input-border;
+  }
+}
+
 #app {
   background: $color-background-main;
   width: 100%;
