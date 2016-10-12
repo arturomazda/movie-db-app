@@ -1,0 +1,13 @@
+{
+  "name": "movie-db-app",
+  "version": "1.0.0",
+  "description": "Movie DB APP",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/arturomazda/movie-db-app"
+  },
+  "author": "Artur Omazda",
+  "license": "MIT",
+  "homepage": "http://omazda.pl"
+}
