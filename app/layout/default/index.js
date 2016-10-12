@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Header from '../../components/header';
+import Footer from '../../components/footer';
 
 import './default.scss';
 
@@ -11,6 +12,7 @@ export default class DefaultLayout extends Component {
         <main>
           View components goes here
         </main>
+        <Footer/>
       </div>
     );
   }
