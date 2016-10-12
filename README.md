@@ -21,3 +21,7 @@ npm run lint
 ```
 npm test
 ```
+
+### Known issues
+* Lack of code comments
+* Lack of fetch error catching
