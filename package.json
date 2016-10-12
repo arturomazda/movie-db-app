@@ -4,7 +4,8 @@
   "description": "Movie DB APP",
   "main": "index.html",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "optimize": "./node_modules/.bin/svgo -f app/images"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "sass-lint": "^1.9.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
+    "svgo": "^0.7.1",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1"
   }
