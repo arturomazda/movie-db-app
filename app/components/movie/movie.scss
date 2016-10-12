@@ -1,0 +1,47 @@
+@import '../../common/styles/functions.scss';
+
+.movie {
+  .container {
+    position: relative;
+    overflow: hidden;
+
+    &:after {
+      display: block;
+      content: '';
+      padding-top: 142%;
+    }
+  }
+
+  .image {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  .wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: rem-calc(15px);
+    background: rgba(#333, .9);
+    color: $color-font-negative;
+
+    .title {
+      font-weight: $global-font-weight-bold;
+      font-size: rem-calc(20px);
+    }
+
+    .description {
+      margin: rem-calc(10px 0 0);
+      font-size: rem-calc(12px);
+      text-align: justify;
+      line-height: 1.5em;
+      max-height: 9em;
+      overflow: hidden;
+    }
+  }
+}
