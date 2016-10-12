@@ -1,0 +1,13 @@
+@import '../../common/styles/functions.scss';
+
+.footer {
+  color: $color-font-negative;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  padding: 1rem;
+  z-index: -1;
+  font-size: rem-calc(12px);
+}
