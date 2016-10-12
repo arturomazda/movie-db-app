@@ -1,0 +1,15 @@
+@import '../../common/styles/variables.scss';
+@import '../../common/styles/functions.scss';
+
+.search-box {
+  display: flex;
+  font-size: rem-calc(26px);
+
+  input {
+    flex: 1 0 auto;
+  }
+
+  button {
+    flex: 0 1 auto;
+  }
+}
