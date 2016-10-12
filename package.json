@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "node server.js",
+    "lint": "./node_modules/.bin/eslint ./app",
     "optimize": "./node_modules/.bin/svgo -f app/images"
   },
   "repository": {
