@@ -5,12 +5,16 @@ import Footer from '../../components/footer';
 import './default.scss';
 
 export default class DefaultLayout extends Component {
+  static propTypes = {
+    children: PropTypes.node
+  }
+
   render() {
     return (
       <div className="default-layout">
         <Header/>
         <main>
-          View components goes here
+          {this.props.children}
         </main>
         <Footer/>
       </div>
