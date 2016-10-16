@@ -19,7 +19,14 @@ export default class MovieDbService {
       api_key: this.apiKey
     };
 
-    return this.httpService.get(url, params);
+    return this.httpService.get(url, params)
+      .then((response) => {
+        if(response.total_results > 0) {
+          return response;
+        } else {
+          return Promise.reject({text: 'Nothing found'});
+        }
+      });
   }
 
   searchMovieResponseTransformer(response) {

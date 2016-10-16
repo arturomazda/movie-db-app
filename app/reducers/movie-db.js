@@ -1,7 +1,8 @@
 const defaultState = {
   loading: false,
-  searchingMovieResponse: {},
-  messages: {}
+  message: {},
+  movies: {},
+  movie: {}
 };
 
 export default function reducer(state = defaultState, action) {
@@ -10,41 +11,47 @@ export default function reducer(state = defaultState, action) {
     case 'SEARCH_MOVIE_REQUEST': {
       return {
         ...state,
-        loading: true
+        loading: true,
+        message: {},
+        movies: {}
       };
     }
     case 'SEARCH_MOVIE_SUCCESS': {
       return {
         ...state,
         loading: false,
-        searchingMovieResponse: action.payload
+        movies: action.payload
       };
     }
     case 'SEARCH_MOVIE_FAILURE': {
       return {
         ...state,
         loading: false,
-        messages: action.payload
+        message: action.payload,
+        movies: {}
       };
     }
     case 'GET_MOVIE_REQUEST': {
       return {
         ...state,
-        getMovie: true
-      };
-    }
-    case 'GET_MOVIE_FAILURE': {
-      return {
-        ...state,
-        getMovie: false,
-        messages: action.payload
+        loading: true,
+        message: {},
+        movie: {}
       };
     }
     case 'GET_MOVIE_SUCCESS': {
       return {
         ...state,
         loading: false,
-        getMovieResponse: action.payload
+        movie: action.payload
+      };
+    }
+    case 'GET_MOVIE_FAILURE': {
+      return {
+        ...state,
+        loading: false,
+        messages: action.payload,
+        movie: {}
       };
     }
   }

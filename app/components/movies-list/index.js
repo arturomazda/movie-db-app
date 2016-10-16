@@ -12,14 +12,12 @@ import {
 import './movies-list.scss';
 
 const mapStateToProps = (state) => ({
-  movies: state.searchingMovieResponse.results || [],
-  moviesTotal: state.searchingMovieResponse.total_results,
+  movies: state.movies.results || []
 });
 
 class MoviesList extends Component {
   static propTypes = {
     movies: PropTypes.array,
-    moviesTotal: PropTypes.number
   }
 
   render() {
