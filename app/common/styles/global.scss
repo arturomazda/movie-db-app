@@ -40,7 +40,7 @@ input {
 button {
   border: rem-calc(1px) solid $color-primary;
   background-color: $color-primary;
-  padding: .5em 1em;
+  padding: .5em 0;
   font-size: 1em;
   color: $color-font-negative;
   font-weight: $global-font-weight;

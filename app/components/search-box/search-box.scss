@@ -2,16 +2,21 @@
 
 .search-box {
   display: flex;
+  overflow: hidden;
 
   input {
-    flex: 1 0 auto;
+    flex: 0 1 100%;
   }
 
   button {
-    flex: 0 1 auto;
+    flex: 0 0 rem-calc(80px);
   }
 
   @media #{$medium-up} {
     font-size: rem-calc(26px);
+
+    button {
+      flex: 0 0 rem-calc(120px);
+    }
   }
 }
