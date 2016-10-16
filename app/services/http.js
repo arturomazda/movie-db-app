@@ -7,7 +7,13 @@ export default class HttpService {
         headers: new Headers(),
         mode: 'cors'
       })
-      .then(response => response.json() );
+      .then((response) => {
+        if(response.status === 200) {
+          return response.json().then((json) => json);
+        } else {
+          return Promise.reject({text: response.statusText});
+        }
+      });
   }
 
   _parseParams(params = {}) {

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-
 import MovieDetails from '../../components/movie-details';
 
 import './movie-view.scss';

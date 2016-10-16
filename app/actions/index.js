@@ -17,7 +17,7 @@ export function searchMovie(query) {
       })
       .catch((error) => {
         dispatch({
-          type: 'SEARCH_MOVIE_ERROR',
+          type: 'SEARCH_MOVIE_FAILURE',
           payload: error
         });
       });
@@ -39,7 +39,7 @@ export function getMovie(movieId) {
       })
       .catch((error) => {
         dispatch({
-          type: 'GET_MOVIE_ERROR',
+          type: 'GET_MOVIE_FAILURE',
           payload: error
         });
       });

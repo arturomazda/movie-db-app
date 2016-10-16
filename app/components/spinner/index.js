@@ -1,28 +1,28 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 import './spinner.scss';
 
-export default class Spinner extends Component {
+const mapStateToProps = (state) => ({
+  loading: state.loading || false
+});
+
+class Spinner extends Component {
   static propTypes = {
-    message: PropTypes.string,
+    loading: PropTypes.bool
   }
 
   render() {
-    return (
-      <div className="spinner">
-        <div className="icon"/>
-        {this._renderMessage()}
-      </div>
-    );
-  }
-
-  _renderMessage() {
-    if(this.props.message) {
+    if(this.props.loading) {
       return (
-        <p className="message">{this.props.message}</p>
+        <div className="spinner">
+        <div className="icon"/>
+        </div>
       );
     }
 
     return null;
   }
 }
+
+export default connect(mapStateToProps)(Spinner);

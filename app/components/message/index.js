@@ -1,17 +1,31 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { get } from 'lodash';
 
 import './message.scss';
 
-export default class Message extends Component {
+const mapStateToProps = (state) => ({
+  message: state.messages
+});
+
+class Message extends Component {
   static propTypes = {
-    text: PropTypes.string,
+    message: PropTypes.object
   }
 
   render() {
-    return (
-      <div className="message">
-        {this.props.text}
-      </div>
-    );
+    const messageText = get(this.props, 'message.text');
+
+    if(messageText) {
+      return (
+        <div className="message">
+          {messageText}
+        </div>
+      );
+    }
+
+    return null;
   }
 }
+
+export default connect(mapStateToProps)(Message);
