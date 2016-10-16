@@ -2,13 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { searchMovie as searchMovieAction } from '../../actions';
 
-import SearchBox from './search-box';
+import './search-box.scss';
 
 const mapStateToProps = (state) => ({
-  searching: state.searchingMovie
+  searching: state.loading
 });
 
-class SearchBoxContainer extends Component {
+class SearchBox extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     searching: PropTypes.bool
@@ -23,9 +23,16 @@ class SearchBoxContainer extends Component {
 
   render() {
     return (
-      <SearchBox handleQueryChange={this.handleQueryChange}
-                 handleSubmit={this.handleSubmit}
-                 searching={this.props.searching} />
+      <form className="search-box" onSubmit={this.handleSubmit}>
+        <input placeholder="Type movie title to search"
+               onChange={this.handleQueryChange}
+               disabled={this.props.searching}
+               type="text" />
+        <button disabled={this.props.searching}
+                onClick={this.handleSubmit} >
+          Search
+        </button>
+      </form>
     );
   }
 
@@ -39,4 +46,4 @@ class SearchBoxContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps)(SearchBoxContainer);
+export default connect(mapStateToProps)(SearchBox);
