@@ -12,10 +12,16 @@
 
   .home-link {
     color: $color-font-negative;
+
+    &.active {
+      cursor: default;
+      pointer-events: none;
+    }
   }
 
   .logo {
     float: left;
+    width: rem-calc(24px);
   }
 
   .title {
