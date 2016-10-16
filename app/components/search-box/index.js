@@ -27,6 +27,8 @@ class SearchBox extends Component {
         <input placeholder="Type movie title to search"
                onChange={this.handleQueryChange}
                disabled={this.props.searching}
+               maxLength="30"
+               minLength="1"
                type="text" />
         <button disabled={this.props.searching}
                 onClick={this.handleSubmit} >
