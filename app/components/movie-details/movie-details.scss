@@ -1,16 +1,29 @@
 @import '../../common/styles/functions.scss';
 
 .movie-details {
-  .image,
-  .details {
-    max-width: 50%;
-    float: left;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
 
-  .details {
-    background: $color-background-main;
+  .image-container,
+  .details-container {
     padding: rem-calc(15px);
     box-sizing: border-box;
+    flex: 1 0 100%;
+  }
+
+  .image-container {
+    overflow: hidden;
+
+    .image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .details-container {
+    background: $color-background-main;
   }
 
   .title {
@@ -23,5 +36,18 @@
     margin: rem-calc(15px 0 0);
     font-size: rem-calc(20px);
     line-height: rem-calc(25px);
+  }
+
+  @media #{$medium-up} {
+    flex-direction: row;
+
+    .image-container,
+    .details-container {
+      flex: 1 0 50%;
+    }
+
+    .image-container {
+      padding: rem-calc(0 15px 0 0);
+    }
   }
 }

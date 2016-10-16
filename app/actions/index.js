@@ -12,7 +12,7 @@ export function searchMovie(query) {
       .then((response) => {
         dispatch({
           type: 'SEARCH_MOVIE_SUCCESS',
-          payload: movieDbService.searchMovieResponseTransformer(response)
+          payload: response
         });
       })
       .catch((error) => {
@@ -34,7 +34,7 @@ export function getMovie(movieId) {
       .then((response) => {
         dispatch({
           type: 'GET_MOVIE_SUCCESS',
-          payload: movieDbService.getMovieResponseTransformer(response)
+          payload: response
         });
       })
       .catch((error) => {

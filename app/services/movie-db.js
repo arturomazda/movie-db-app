@@ -22,14 +22,14 @@ export default class MovieDbService {
     return this.httpService.get(url, params)
       .then((response) => {
         if(response.total_results > 0) {
-          return response;
+          return this._searchMovieResponseTransformer(response);
         } else {
           return Promise.reject({text: 'Nothing found'});
         }
       });
   }
 
-  searchMovieResponseTransformer(response) {
+  _searchMovieResponseTransformer(response) {
     const cleanResults = response.results.map((movie) => {
       let cleanMovie = {};
 
@@ -59,10 +59,13 @@ export default class MovieDbService {
       api_key: this.apiKey
     };
 
-    return this.httpService.get(url, params);
+    return this.httpService.get(url, params)
+      .then((response) => {
+        return this._getMovieResponseTransformer(response);
+      });
   }
 
-  getMovieResponseTransformer(response) {
+  _getMovieResponseTransformer(response) {
     let movie = {};
 
     if(response.title !== '') {

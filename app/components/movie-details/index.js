@@ -1,50 +1,49 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { get } from 'lodash';
 import { getMovie as getMovieAction } from '../../actions';
 
-import MovieDetails from './movie-details';
-import Spinner from '../spinner';
+import './movie-details.scss';
 
 const mapStateToProps = (state) => ({
-  loading: state.getMovie,
-  error: state.getMovieError,
-  movie: state.getMovieResponse || {},
+  movie: state.movie || {},
   dispatch: PropTypes.func
 });
 
-class MovieDetailsContainer extends Component {
+class MovieDetails extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     movieId: PropTypes.string,
-    loading: PropTypes.bool,
-    error: PropTypes.bool,
     movie: PropTypes.object
   }
 
   render() {
-    if(this.props.loading) {
+    const movie = get(this.props, 'movie');
+
+    if(Object.keys(movie).length) {
       return (
-        <Spinner/>
-      );
-    }
-
-    return (
-      this._renderMovieDetails()
-    );
-  }
-
-  componentWillMount() {
-    this._getMovieData();
-  }
-
-  _renderMovieDetails() {
-    if(this.props.movie) {
-      return (
-        <MovieDetails movie={this.props.movie}/>
+        <div className="movie-details">
+          <div className="image-container">
+            <img alt={`${movie.title} movie poster`}
+                 className="image"
+                 src={movie.image} />
+          </div>
+          <div className="details-container">
+            <h1 className="title">
+              {movie.title}
+            </h1>
+            {(movie.released) ? <p className="released">Released: {movie.released}</p> : null}
+            {(movie.description) ? <p className="description">{movie.description}</p> : null}
+          </div>
+        </div>
       );
     }
 
     return null;
+  }
+
+  componentWillMount() {
+    this._getMovieData();
   }
 
   _getMovieData() {
@@ -52,4 +51,4 @@ class MovieDetailsContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps)(MovieDetailsContainer);
+export default connect(mapStateToProps)(MovieDetails);
