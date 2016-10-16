@@ -1,6 +1,6 @@
 import HttpService from './http';
 
-const API_KEY = '55853b661a66c0c7e605f2530dcfe2e2h'; //movie this key somwhere else
+const API_KEY = '55853b661a66c0c7e605f2530dcfe2e2'; //movie this key somwhere else
 const API_URL = 'https://api.themoviedb.org/3/';
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 
