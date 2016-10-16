@@ -2,22 +2,20 @@
 
 .movies-list {
   display: flex;
-  margin: rem-calc(0 0 0 -15px);
   flex-wrap: wrap;
   overflow: hidden;
 
   &-item {
-    margin: rem-calc(15px 0 0 15px);
-    flex: 1 0 20%;
-    animation: flyFromTop 1.1s normal forwards ease-in-out;
+    margin: rem-calc(15px 0 0);
+    flex: 1 0 100%;
   }
 
-  @keyframes flyFromTop {
-    0% {
-      transform: translateY(-100vh);
-    }
-    100% {
-      transform: translateY(0);
+  @media #{$medium-up} {
+    margin: rem-calc(0 0 0 -15px);
+
+    .movies-list-item {
+      margin: rem-calc(15px 0 0 15px);
+      flex: 1 0 rem-calc(240px);
     }
   }
 }
