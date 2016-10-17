@@ -11,8 +11,13 @@ export default class HttpService {
         if(response.status === 200) {
           return response.json().then((json) => json);
         } else {
-          return Promise.reject({text: response.statusText});
+          return Promise.reject({ text: response.statusText });
         }
+      })
+      .catch(() => {
+        return Promise.reject({
+          text: 'Search failed, please try again'
+        });
       });
   }
 

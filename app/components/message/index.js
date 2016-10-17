@@ -5,7 +5,7 @@ import { get } from 'lodash';
 import './message.scss';
 
 const mapStateToProps = (state) => ({
-  message: state.messages
+  message: state.message
 });
 
 class Message extends Component {
@@ -15,7 +15,7 @@ class Message extends Component {
 
   render() {
     const messageText = get(this.props, 'message.text');
-
+    console.log(this.props);
     if(messageText) {
       return (
         <div className="message">
