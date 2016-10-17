@@ -17,17 +17,14 @@ export default class HttpService {
   }
 
   _parseParams(params = {}) {
-    const paramsKeys = Object.keys(params);
-    let newParams = '';
+    if(Object.keys(params).length !== 0) {
+      let newParams = Object.keys(params).reduce((memo, param) => {
+        return memo + `&${param}=${params[param]}`;
+      }, '');
 
-    if(Object.keys(params).length === 0) {
-      return '';
+      return `?${newParams.slice(1)}`;
     }
 
-    Object.keys(params).forEach((param) => {
-      newParams = `${newParams}&${param}=${params[param]}`;
-    });
-
-    return `?${newParams.slice(1)}`;
+    return '';
   }
 }
