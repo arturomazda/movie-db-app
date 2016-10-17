@@ -2,7 +2,8 @@ const defaultState = {
   loading: false,
   message: {},
   movies: {},
-  movie: {}
+  movie: {},
+  query: ''
 };
 
 export default function reducer(state = defaultState, action) {
@@ -12,7 +13,8 @@ export default function reducer(state = defaultState, action) {
         ...state,
         loading: true,
         message: {},
-        movies: {}
+        movies: {},
+        query: action.query
       };
     }
     case 'SEARCH_MOVIE_SUCCESS': {

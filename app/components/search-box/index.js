@@ -5,13 +5,15 @@ import { searchMovie as searchMovieAction } from '../../actions';
 import './search-box.scss';
 
 const mapStateToProps = (state) => ({
-  searching: state.loading
+  searching: state.loading,
+  query: state.query
 });
 
 class SearchBox extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
-    searching: PropTypes.bool
+    searching: PropTypes.bool,
+    query: PropTypes.string
   }
 
   constructor(props) {
@@ -27,6 +29,7 @@ class SearchBox extends Component {
         <input placeholder="Type movie title to search"
                onChange={this.handleQueryChange}
                disabled={this.props.searching}
+               value={this.state.query}
                maxLength="30"
                minLength="1"
                type="text" />
@@ -36,6 +39,10 @@ class SearchBox extends Component {
         </button>
       </form>
     );
+  }
+
+  componentWillMount() {
+    this.setState({query: this.props.query});
   }
 
   handleQueryChange(event) {

@@ -5,7 +5,8 @@ const movieDbService = new MovieDbService();
 export function searchMovie(query) {
   return (dispatch) => {
     dispatch({
-      type: 'SEARCH_MOVIE_REQUEST'
+      type: 'SEARCH_MOVIE_REQUEST',
+      query: query
     });
 
     movieDbService.searchMovie(query)
