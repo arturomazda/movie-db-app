@@ -2,6 +2,7 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
+var appConfig = require('./app-config');
 
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
@@ -9,9 +10,9 @@ new WebpackDevServer(webpack(config), {
   noInfo: true,
   stats: { colors: true },
   historyApiFallback: true
-}).listen(9000, 'localhost', function (err) {
+}).listen(appConfig.port, appConfig.host, function (err) {
     if (err) {
       console.error(err);
     }
-    console.log('Listening at localhost:9000');
+    console.log('Listening at ' + appConfig.host + ':' + appConfig.port);
   });

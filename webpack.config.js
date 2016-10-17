@@ -1,10 +1,14 @@
 /* eslint-disable no-var */
 var webpack = require('webpack');
 var path = require('path');
+var appConfig = require('./app-config');
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:9000',
+    'webpack-dev-server/client?'
+      + appConfig.protocol
+      + appConfig.host
+      + ':' + appConfig.port,
     'webpack/hot/dev-server',
     './app/index'
   ],

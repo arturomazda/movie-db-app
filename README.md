@@ -6,9 +6,10 @@ App is based on *React* + *Redux*
 ### Usage
 
 ```
-npm install
-npm start
-Open http://localhost:9000
+1) npm install
+2) rename app-config.js.template.js to app-config.js and replace movieDbApiKey
+3) npm start
+4) Open http://localhost:9000 (default)
 ```
 
 ### Linting

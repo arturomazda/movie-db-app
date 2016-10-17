@@ -1,8 +1,9 @@
 import HttpService from './http';
+import { movieDbApiKey, movieDbApiUrl, movieDbImageUrl } from '../../app-config.js';
 
-const API_KEY = '55853b661a66c0c7e605f2530dcfe2e2'; //movie this key somwhere else
-const API_URL = 'https://api.themoviedb.org/3/';
-const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
+const API_KEY = movieDbApiKey;
+const API_URL = movieDbApiUrl;
+const IMAGE_URL = movieDbImageUrl;
 
 export default class MovieDbService {
   constructor() {
