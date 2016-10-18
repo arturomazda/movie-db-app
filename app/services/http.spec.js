@@ -1,49 +1,84 @@
-import HttpService from './http.js';
+import { get as httpGet } from './http';
 
 describe('HTTP Service', () => {
   const testParams = { tag: 'dog', key: 'abc' };
-  const testResponse = {amount: 10};
   const testUrl = 'http://test.api.com';
-  const httpService = new HttpService();
 
   describe('#get()', () => {
-    let serviceResponse;
+    let httpGetResponse;
 
-    beforeAll(() => {
-      spyOn(window, 'fetch').and.returnValue(
-        Promise.resolve({ json: () => Promise.resolve(testResponse) })
-      );
-      spyOn(httpService, '_parseParams').and.callThrough();
+    describe('when response with status 200', () => {
+      beforeAll(() => {
+        spyOn(window, 'fetch').and.returnValue(
+          Promise.resolve({
+            status: 200,
+            json: () => Promise.resolve(true)
+          })
+        );
+      });
+
+      beforeAll((done) => {
+        return httpGet(testUrl, testParams)
+          .then((response) => {
+            httpGetResponse = response;
+            done();
+          });
+      });
+
+      it('calls fetch() with proper url', () => {
+        expect(window.fetch).toHaveBeenCalledWith(
+          testUrl + '?key=abc&tag=dog',
+          jasmine.any(Object)
+        );
+      });
+
+      it('response amount should be equal 10', () => {
+        expect(httpGetResponse).toBe(true);
+      });
     });
 
-    beforeAll((done) => {
-      return httpService.get(testUrl, testParams)
-        .then((response) => {
-          serviceResponse = response;
-          done();
-        });
+    describe('when response with status 400', () => {
+      beforeAll(() => {
+        spyOn(window, 'fetch').and.returnValue(
+          Promise.resolve({
+            status: 400,
+            statusText: 'fail'
+          })
+        );
+      });
+
+      beforeAll((done) => {
+        return httpGet(testUrl, testParams)
+          .catch((response) => {
+            httpGetResponse = response;
+            done();
+          });
+      });
+
+      it('response should be object with text property', () => {
+        expect(httpGetResponse.text).toEqual('fail');
+      });
     });
 
-    it('calls fetch()', () => {
-      expect(window.fetch).toHaveBeenCalled();
-    });
+    describe('when fetch failed', () => {
+      beforeAll(() => {
+        spyOn(window, 'fetch').and.returnValue(
+          Promise.reject({})
+        );
+      });
 
-    it('calls _parseParams() with proper params', () => {
-      expect(httpService._parseParams).toHaveBeenCalledWith(testParams);
-    });
+      beforeAll((done) => {
+        return httpGet(testUrl, testParams)
+          .catch((response) => {
+            httpGetResponse = response;
+            done();
+          });
+      });
 
-    it('response amount should be equal 10', () => {
-      expect(serviceResponse.amount).toEqual(10);
-    });
-  });
-
-  describe('#_parseParams()', () => {
-    it('returns proper string when good params are passed', () => {
-      expect(httpService._parseParams(testParams)).toBe('?tag=dog&key=abc');
-    });
-
-    it('returns empty string when params are empty object', () => {
-      expect(httpService._parseParams({})).toBe('');
+      it('response should be object with text property', () => {
+        expect(httpGetResponse.text)
+          .toEqual('Search failed, please try again');
+      });
     });
   });
 });
