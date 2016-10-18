@@ -12,12 +12,12 @@ export function get(url, params) {
       if(response.status === 200) {
         return response.json().then((json) => json);
       } else {
-        return Promise.reject({ text: response.statusText });
+        return Promise.reject(response);
       }
     })
-    .catch(() => {
+    .catch((response) => {
       return Promise.reject({
-        text: 'Search failed, please try again'
+        text: response.statusText || 'Search failed, please try again'
       });
     });
 }
