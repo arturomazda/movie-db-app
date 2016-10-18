@@ -1,18 +1,18 @@
 import React, { Component, PropTypes } from 'react';
+import { lowerCase, isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 import { searchMovies as searchMoviesAction } from '../../actions';
 
 import './search-box.scss';
 
 const mapStateToProps = (state) => ({
-  searching: state.loading,
-  query: state.query
+  searching: state.loading
 });
 
 class SearchBox extends Component {
   static propTypes = {
-    dispatch: PropTypes.func,
     searching: PropTypes.bool,
+    dispatch: PropTypes.func,
     query: PropTypes.string
   }
 
@@ -42,16 +42,35 @@ class SearchBox extends Component {
   }
 
   componentWillMount() {
-    this.setState({query: this.props.query});
+    const { query } = this.props;
+
+    this.setState({ query: query });
+    this._searchMovies(query);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props.query !== nextProps.query) {
+      const { query } = nextProps;
+
+      this.setState({ query: query });
+      this._searchMovies(query);
+    }
   }
 
   handleQueryChange(event) {
-    this.setState({query: event.target.value});
+    this.setState({ query: lowerCase(event.target.value) });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.dispatch(searchMoviesAction(this.state.query));
+    this._searchMovies(this.state.query);
+  }
+
+  _searchMovies(query) {
+    if(!isEmpty(query)) {
+      console.log('searchMoviesAction');
+      this.props.dispatch(searchMoviesAction(query));
+    }
   }
 }
 

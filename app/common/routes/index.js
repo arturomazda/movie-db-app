@@ -9,6 +9,10 @@ export const routes = {
   indexRoute: { component: SearchView },
   childRoutes: [
     {
+      path: 'search/:query',
+      component: SearchView
+    },
+    {
       path: 'movie/:movieId',
       component: MovieView
     },
