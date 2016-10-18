@@ -68,7 +68,6 @@ class SearchBox extends Component {
 
   _searchMovies(query) {
     if(!isEmpty(query)) {
-      console.log('searchMoviesAction');
       this.props.dispatch(searchMoviesAction(query));
     }
   }

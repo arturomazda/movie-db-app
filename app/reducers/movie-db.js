@@ -35,6 +35,7 @@ export default function reducer(state = defaultState, action) {
     case 'SEARCH_MORE_MOVIES_REQUEST': {
       return {
         ...state,
+        loading: true,
         message: {}
       };
     }
