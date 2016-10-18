@@ -1,4 +1,4 @@
-import HttpService from './http';
+import { get as httpGet } from './http';
 import { movieDbApiKey, movieDbApiUrl, movieDbImageUrl } from '../../app-config.js';
 
 const API_KEY = movieDbApiKey;
@@ -10,7 +10,6 @@ export default class MovieDbService {
     this.apiKey = API_KEY;
     this.apiUrl = API_URL;
     this.imageUrl = IMAGE_URL;
-    this.httpService = new HttpService();
   }
 
   searchMovies(query, page = 1) {
@@ -21,7 +20,7 @@ export default class MovieDbService {
       api_key: this.apiKey
     };
 
-    return this.httpService.get(url, params)
+    return httpGet(url, params)
       .then((response) => {
         if(response.total_results > 0) {
           return this._searchMovieResponseTransformer(response);
@@ -61,7 +60,7 @@ export default class MovieDbService {
       api_key: this.apiKey
     };
 
-    return this.httpService.get(url, params)
+    return httpGet(url, params)
       .then((response) => {
         return this._getMovieResponseTransformer(response);
       });
