@@ -1,3 +1,7 @@
 $medium: 40em;
+$large: 45em;
+$xl-large: 80em;
 
 $medium-up: "(min-width: #{$medium})";
+$large-up: "(min-width: #{$large})";
+$xl-large-up: "(min-width: #{$xl-large})";
