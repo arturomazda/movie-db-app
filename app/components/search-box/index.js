@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { searchMovie as searchMovieAction } from '../../actions';
+import { searchMovies as searchMoviesAction } from '../../actions';
 
 import './search-box.scss';
 
@@ -51,7 +51,7 @@ class SearchBox extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.dispatch(searchMovieAction(this.state.query));
+    this.props.dispatch(searchMoviesAction(this.state.query));
   }
 }
 

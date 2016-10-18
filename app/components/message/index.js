@@ -15,7 +15,7 @@ class Message extends Component {
 
   render() {
     const messageText = get(this.props, 'message.text');
-    console.log(this.props);
+
     if(messageText) {
       return (
         <div className="message">

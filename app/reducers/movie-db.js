@@ -7,9 +7,8 @@ const defaultState = {
 };
 
 export default function reducer(state = defaultState, action) {
-  console.log(action);
   switch (action.type) {
-    case 'SEARCH_MOVIE_REQUEST': {
+    case 'SEARCH_MOVIES_REQUEST': {
       return {
         ...state,
         loading: true,
@@ -18,19 +17,42 @@ export default function reducer(state = defaultState, action) {
         query: action.query
       };
     }
-    case 'SEARCH_MOVIE_SUCCESS': {
+    case 'SEARCH_MOVIES_SUCCESS': {
       return {
         ...state,
         loading: false,
         movies: action.payload
       };
     }
-    case 'SEARCH_MOVIE_FAILURE': {
+    case 'SEARCH_MOVIES_FAILURE': {
       return {
         ...state,
         loading: false,
         message: action.payload,
         movies: {}
+      };
+    }
+    case 'SEARCH_MORE_MOVIES_REQUEST': {
+      return {
+        ...state,
+        message: {}
+      };
+    }
+    case 'SEARCH_MORE_MOVIES_SUCCESS': {
+      return {
+        ...state,
+        loading: false,
+        movies: Object.assign(
+          action.payload,
+          { results: state.movies.results.concat(action.payload.results) }
+        )
+      };
+    }
+    case 'SEARCH_MORE_MOVIES_FAILURE': {
+      return {
+        ...state,
+        loading: false,
+        message: action.payload
       };
     }
     case 'GET_MOVIE_REQUEST': {

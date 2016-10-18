@@ -13,10 +13,11 @@ export default class MovieDbService {
     this.httpService = new HttpService();
   }
 
-  searchMovie(query) {
+  searchMovies(query, page = 1) {
     const url = this._getApiUrl('searchMovie');
     const params = {
       query: query,
+      page: page,
       api_key: this.apiKey
     };
 
