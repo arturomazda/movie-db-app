@@ -1,22 +1,53 @@
 import React, { Component, PropTypes } from 'react';
-import { lowerCase } from 'lodash';
+import { connect } from 'react-redux';
+import { isEmpty } from 'lodash';
 
-import SearchBox from '../../components/search-box';
+import { searchMovies as searchMoviesAction } from '../../actions';
 import MoviesList from '../../components/movies-list';
+import SearchBox from '../../components/search-box';
 
 import './search-view.scss';
 
-export default class SearchView extends Component {
+const mapStateToProps = (state) => ({
+  query: state.query
+});
+
+class SearchView extends Component {
   static propTypes = {
-    params: PropTypes.object
+    dispatch: PropTypes.func,
+    params: PropTypes.object,
+    query: PropTypes.string
   }
 
   render() {
     return (
       <div className="search-view">
-        <SearchBox query={lowerCase(this.props.params.query)}/>
+        <SearchBox/>
         <MoviesList/>
       </div>
     );
   }
+
+  componentWillMount() {
+    this._searchMovie(this.props.params.query);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { query } = this.props;
+    const nextQuery = nextProps.query;
+    const urlQuery = this.props.params.query;
+    const nextUrlQuery  = nextProps.params.query;
+
+    if(query === nextQuery && urlQuery !== nextUrlQuery) {
+      this._searchMovie(nextUrlQuery);
+    }
+  }
+
+  _searchMovie(query) {
+    if(!isEmpty(query)) {
+      this.props.dispatch(searchMoviesAction(query));
+    }
+  }
 }
+
+export default connect(mapStateToProps)(SearchView);

@@ -1,6 +1,4 @@
 import MovieDbService from '../services/movie-db';
-import { browserHistory } from 'react-router';
-import { kebabCase } from 'lodash';
 
 const movieDbService = new MovieDbService();
 
@@ -13,8 +11,6 @@ export function searchMovies(query) {
 
     movieDbService.searchMovies(query)
       .then((response) => {
-        browserHistory.push('/search/' + kebabCase(query));
-
         dispatch({
           type: 'SEARCH_MOVIES_SUCCESS',
           payload: response

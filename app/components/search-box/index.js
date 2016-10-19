@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react';
-import { isEmpty } from 'lodash';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
+import { kebabCase } from 'lodash';
+
 import { searchMovies as searchMoviesAction } from '../../actions';
 
 import './search-box.scss';
 
 const mapStateToProps = (state) => ({
-  searching: state.loading
+  searching: state.loading,
+  query: state.query
 });
 
 class SearchBox extends Component {
@@ -42,18 +45,12 @@ class SearchBox extends Component {
   }
 
   componentWillMount() {
-    const { query } = this.props;
-
-    this.setState({ query: query });
-    this._searchMovies(query);
+    this.setState({ query: this.props.query });
   }
 
   componentWillReceiveProps(nextProps) {
     if(this.props.query !== nextProps.query) {
-      const { query } = nextProps;
-
-      this.setState({ query: query });
-      this._searchMovies(query);
+      this.setState({ query: nextProps.query });
     }
   }
 
@@ -62,14 +59,11 @@ class SearchBox extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
-    this._searchMovies(this.state.query);
-  }
+    const { query } = this.state;
 
-  _searchMovies(query) {
-    if(!isEmpty(query)) {
-      this.props.dispatch(searchMoviesAction(query));
-    }
+    event.preventDefault();
+    browserHistory.push('/search/' + kebabCase(query));
+    this.props.dispatch(searchMoviesAction(query));
   }
 }
 
