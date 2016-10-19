@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { lowerCase, isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 import { searchMovies as searchMoviesAction } from '../../actions';
 
@@ -58,7 +58,7 @@ class SearchBox extends Component {
   }
 
   handleQueryChange(event) {
-    this.setState({ query: lowerCase(event.target.value) });
+    this.setState({ query: event.target.value });
   }
 
   handleSubmit(event) {
