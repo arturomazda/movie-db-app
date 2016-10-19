@@ -3,31 +3,68 @@ import MovieDbService from './movie-db';
 describe('Movie DB Service', () => {
   let movieDbService = new MovieDbService();
 
-  describe('#searchMovie()', () => {
+  describe('#searchMovies()', () => {
     const movieTitle = 'Test Name';
-    let httpService;
+    let searchMoviesResponse;
 
-    beforeAll(() => {
-      httpService = {
-        get: (value) => { return 'test'; }
-      };
-      spyOn(movieDbService, '_getApiUrl').and.callThrough();
-      spyOn(httpService, 'get');
+    describe('when get response have results', () => {
+      beforeAll(() => {
+        spyOn(movieDbService, '_getApiUrl').and.callThrough();
+        spyOn(movieDbService, '_searchMovieResponseTransformer')
+          .and.returnValue(true);
+        spyOn(movieDbService, 'get').and.returnValue(
+          Promise.resolve({ total_results: 10 })
+        );
+      });
 
-      movieDbService.httpService = httpService;
-      movieDbService.searchMovie(movieTitle);
+      beforeAll((done) => {
+        return movieDbService.searchMovies(movieTitle)
+          .then((response) => {
+            searchMoviesResponse = response;
+            done();
+          });
+      });
+
+      it('calls _getApiUrl()', () => {
+        expect(movieDbService._getApiUrl).toHaveBeenCalledWith('searchMovie');
+      });
+
+      it('calls httpService.get()', () => {
+        expect(movieDbService.get).toHaveBeenCalled();
+      });
+
+      it('calls _searchMovieResponseTransformer()', () => {
+        expect(movieDbService._searchMovieResponseTransformer)
+          .toHaveBeenCalled();
+      });
+
+      it('result should be array', () => {
+        expect(searchMoviesResponse).toBe(true);
+      });
     });
 
-    it('calls _getApiUrl()', () => {
-      expect(movieDbService._getApiUrl).toHaveBeenCalledWith('searchMovie');
-    });
+    describe('when get response have results', () => {
+      beforeAll(() => {
+        spyOn(movieDbService, 'get').and.returnValue(
+          Promise.resolve({ total_results: 0 })
+        );
+      });
 
-    it('calls httpService.get()', () => {
-      expect(movieDbService.httpService.get).toHaveBeenCalled();
+      beforeAll((done) => {
+        return movieDbService.searchMovies(movieTitle)
+          .catch((response) => {
+            searchMoviesResponse = response;
+            done();
+          });
+      });
+
+      it('response should be object with text propery', () => {
+        expect(searchMoviesResponse.text).toBe('Nothing found');
+      });
     });
   });
 
-  describe('#searchMovieResponseTransformer()', () => {
+  describe('#_searchMovieResponseTransformer()', () => {
     const testResponse = {
       amount: 2,
       results: [
@@ -49,7 +86,7 @@ describe('Movie DB Service', () => {
     let transformedResponse;
 
     beforeAll(() => {
-      transformedResponse = movieDbService.searchMovieResponseTransformer(testResponse);
+      transformedResponse = movieDbService._searchMovieResponseTransformer(testResponse);
     });
 
     it('amount property is 2', () => {
