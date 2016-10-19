@@ -1,5 +1,17 @@
 import { stringify as paramsStringify } from 'query-string';
 
+/**
+ * Http Services module.
+ * @module http
+ */
+
+/**
+ * Fetching resources from api using get method
+ * @constructor
+ * @param {string} url - Url to be called for resources.
+ * @param {object} params - Query params that url will be called with
+ * @return {promise}
+ */
 export function get(url, params) {
   return fetch(
     url + '?' + paramsStringify(params),

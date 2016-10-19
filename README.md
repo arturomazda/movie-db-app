@@ -23,6 +23,11 @@ npm run lint
 npm test
 ```
 
+### Generate documentation
+
+```
+npm run docs
+```
+
 ### Known issues
-* Lack of code comments
-* Lack of fetch error catching
+* Documentation only for services

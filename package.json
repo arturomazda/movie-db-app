@@ -7,6 +7,7 @@
     "start": "node server.js",
     "lint": "./node_modules/.bin/eslint ./app",
     "test": "node_modules/.bin/karma start --single-run --no-auto-watch karma.config.js",
+    "docs": "node_modules/.bin/jsdoc ./app -r -P ./package.json -d ./docs",
     "optimize": "./node_modules/.bin/svgo -f app/images"
   },
   "repository": {
@@ -51,6 +52,7 @@
     "eslint-plugin-react": "6.3.0",
     "istanbul-instrumenter-loader": "1.0.0",
     "jasmine-core": "2.4.1",
+    "jsdoc": "^3.4.2",
     "karma": "0.13.22",
     "karma-chrome-launcher": "1.0.1",
     "karma-coverage": "1.0.0",
